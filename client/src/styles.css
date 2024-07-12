@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#header {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./resources/images/header.jpg');
+    background-size: cover;
+}
+
+#doctors-img {
+    width: 700px;
+    height: 600px;
+    position: relative;
+    left: 50rem;
+    top: 10rem;
+}
