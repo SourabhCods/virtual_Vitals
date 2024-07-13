@@ -4,6 +4,8 @@ import LandingPage from './pages/LandingPage.jsx';
 import Auth from './pages/Auth.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import UserHomePage from './pages/UserHomePage.jsx';
+import DoctorSignup from './pages/doctorSignup.jsx';
+import Login from './pages/Login.jsx';
 
 
 function App (){

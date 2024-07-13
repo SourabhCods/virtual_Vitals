@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { TextField, Button} from '@mui/material';
 import './signUp.css';
 import { Link } from 'react-router-dom';
+import { MainComponent } from './LandingPage';
 
 const Auth = () => {
-
+  
   let [formData , setFormData] = useState({
     patient_name : '',
     emailOrPhone : '',
@@ -29,7 +30,7 @@ const Auth = () => {
   
   return (
       <>
-      
+      <MainComponent/>
       <div className='signUp-form'>
           <p style={{fontSize : '2rem ' , textAlign : 'center'}}>Sign Up</p>
           <form>
