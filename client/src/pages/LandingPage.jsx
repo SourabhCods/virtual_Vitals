@@ -20,7 +20,12 @@ const DashboardIntro = () => {
         <h1>Navigate through your medical information and appointments with ease, with a User Friendly dashboard</h1>
         <p>Personalized Experience for both Patients and Doctors, ensuring a smooth and intuitive experience for all users.</p>
       </div>
+<<<<<<< Updated upstream
     </>
+=======
+      <Link to={'/auth'}>SignUp</Link>
+    </div>
+>>>>>>> Stashed changes
   )
 }
 
