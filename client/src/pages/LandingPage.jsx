@@ -63,9 +63,7 @@ const TransactionIntro = () => {
   )
 }
 
-
-const MainComponent = ({sections}) => {
-
+const NavBar = () => {
   const [activeLink, setActiveLink] = useState('/');
   const navigate = useNavigate();
   const handleClick  = (link)=>()=>{
@@ -73,9 +71,23 @@ const MainComponent = ({sections}) => {
     if (link === 'support') {
       navigate(`/`);
     } else {
-    navigate(`${link}`);
+    navigate(`${link}`, {state: {}});
   }
   }
+  return(
+    <div id='nav-bar'>
+          <ol>
+            <li className={activeLink === '/' ? 'nav-link active' : 'nav-link'} onClick={handleClick('/')} >Home</li>
+            <li className={activeLink === 'dashboard' ? 'nav-link active' : 'nav-link'} onClick={handleClick('/dashboard')} >Dashboard</li>
+            <li className={activeLink === 'support' ? 'nav-link active' : 'nav-link'} onClick={handleClick('support')}>Support</li>
+          </ol>
+        </div>
+  )
+}
+
+
+const MainComponent = ({sections}) => {
+  
   return (
     <div>
       <motion.div initial={{ opacity: 0 }}
@@ -94,6 +106,8 @@ const MainComponent = ({sections}) => {
           </ol>
         </div>
         <Link to={'/auth'}><button id='patient-button'>Sign Up as Patient</button></Link>
+        {<NavBar />}
+        <button id='patient-button'>Sign Up as Patient</button>
         <button id='doctor-button'>Sign Up as Doctor</button>
         <h1 id='intro-line'>Bridge the gap between patients and doctors</h1>
         <button id='get-started'>Get Your First Appointment</button>
@@ -174,3 +188,4 @@ const LandingPage = () => {
 export default LandingPage;
 export {MainComponent};
 
+export {NavBar};
