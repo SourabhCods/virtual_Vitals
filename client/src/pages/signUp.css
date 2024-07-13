@@ -1,0 +1,31 @@
+.signUp-form{
+    height : 40rem;
+    width  : 350px;
+    padding : 20px;
+    border: 1px solid black;
+    margin-left: 700px;
+    margin-top: 6.5rem;
+    border-radius: 1.35rem;
+    
+
+}
+.input-fields{
+    width : 300px !important;
+    margin-top: 1.65rem !important;
+    /* margin-left : 1.3rem; */
+    
+}
+.log-google{
+    height : 3.5rem ;
+    width : 19rem ;
+    border : 1px solid black;
+    font-size : 1.5rem;
+    padding : 0.5rem;
+    margin-top : 2rem;
+}
+.log-google:hover{
+    color:white;
+    background-color :rgb(2, 2, 20);
+    cursor: pointer;
+
+}

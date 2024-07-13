@@ -110,6 +110,14 @@ const MainComponent = ({sections}) => {
       <div id='header'>
         <img src={Logo} id='logo'/>
         <img src={Doctors} id='doctors-img' />
+        <div id='nav-bar'>
+          <ol>
+            <li className={activeLink === '/' ? 'nav-link active' : 'nav-link'} onClick={handleClick('/')} >Home</li>
+            <li className={activeLink === 'guide' ? 'nav-link active' : 'nav-link'} onClick={handleClick('/guide')} >Guide</li>
+            <li className={activeLink === 'support' ? 'nav-link active' : 'nav-link'} onClick={handleClick('support')}>Support</li>
+          </ol>
+        </div>
+        <Link to={'/auth'}><button id='patient-button'>Sign Up as Patient</button></Link>
         {<NavBar />}
         <button id='patient-button'>Sign Up as Patient</button>
         <button id='doctor-button'>Sign Up as Doctor</button>
@@ -179,12 +187,17 @@ const MainComponent = ({sections}) => {
 }
 const LandingPage = () => {
   return (
+    <>
     <MainComponent sections={[() => <DashboardIntro />,
       () => <VideoCall />,
       () => <PrescriptionIntro />,
       () => <TransactionIntro />]} />
+    
+    </>
   )
 }
 
 export default LandingPage;
+export {MainComponent};
+
 export {NavBar};
