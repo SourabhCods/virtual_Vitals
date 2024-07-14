@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TextField, Button} from '@mui/material';
 import './signUp.css';
 import { Link } from 'react-router-dom';
-import { MainComponent } from './LandingPage';
+import { NavBar } from './LandingPage';
 
 const Auth = () => {
   
@@ -30,7 +30,7 @@ const Auth = () => {
   
   return (
       <>
-      <MainComponent/>
+      <NavBar/>
       <div className='signUp-form'>
           <p style={{fontSize : '2rem ' , textAlign : 'center'}}>Sign Up</p>
           <form>
