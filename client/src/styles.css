@@ -23,12 +23,13 @@
 }
 
 #doctors-img {
-    width: 45%;
+    width: 35%;
     height: 75%;
     position: relative;
-    left: 50rem;
+    left: 65.55rem;
     bottom: 1.75rem;
     overflow: hidden;
+    margin-right : 2px;
     filter: drop-shadow(0 0 0.75rem black);
 }
 
@@ -104,7 +105,7 @@
     text-align: center;
     position: relative;
     left: 72%;
-    bottom: 98.5%;
+    bottom: 96.95%;
     font-weight: 500;
     font-family: Rubik;
     z-index: 997;
@@ -119,7 +120,7 @@
     text-align: center;
     position: relative;
     left: 74%;
-    bottom: 98.5%;
+    bottom: 96.95%;
     font-weight: 500;
     font-family: Rubik;
     border: 3px solid black;
