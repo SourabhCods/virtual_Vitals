@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import '../styles.css';
 import Logo from '../resources/images/logo.png'
 import Doctors from '../resources/images/doctors.png';
@@ -64,14 +64,26 @@ const TransactionIntro = () => {
 }
 
 const NavBar = () => {
+  const location = useLocation();
+  const currentPage = location.pathname;
+  useEffect(()=>{
+    if (currentPage === '/') {
+      setActiveLink('/');
+    } else if (currentPage === '/dashboard') {
+      setActiveLink('dashboard');
+    } else {
+      setActiveLink('/support');
+    }
+  }, [currentPage]);
+  console.log(currentPage);
   const [activeLink, setActiveLink] = useState('/');
   const navigate = useNavigate();
   const handleClick  = (link)=>()=>{
     setActiveLink(link);
     if (link === 'support') {
-      navigate(`/`);
+      navigate(`/support`);
     } else {
-    navigate(`${link}`, {state: {}});
+    navigate(`${link}`);
   }
   }
   return(
