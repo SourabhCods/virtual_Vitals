@@ -98,6 +98,7 @@ const NavBar = () => {
 }
 
 
+
 const MainComponent = ({sections}) => {
   
   return (
