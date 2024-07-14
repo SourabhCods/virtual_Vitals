@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb+srv://hrpofficial736:hrp5315q@mycluster.x70l0br.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster')
+mongoose.connect(URL);
 .then(()=>console.log('Connected to MongoDB'))
 .catch((error)=>console.log(error));
 
