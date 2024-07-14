@@ -98,6 +98,7 @@ const NavBar = () => {
 }
 
 
+
 const MainComponent = ({sections}) => {
   
   return (
@@ -112,7 +113,6 @@ const MainComponent = ({sections}) => {
         <img src={Doctors} id='doctors-img' />
         <Link to={'/auth'}><button id='patient-button'>Sign Up as Patient</button></Link>
         {<NavBar />}
-        <button id='patient-button'>Sign Up as Patient</button>
         <button id='doctor-button'>Sign Up as Doctor</button>
         <h1 id='intro-line'>Bridge the gap between patients and doctors</h1>
         <button id='get-started'>Get Your First Appointment</button>
