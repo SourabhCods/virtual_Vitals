@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
     const {emailOrPhone, password} = req.body;
     try {
         const doctorModel = await Doctor.findOne({emailOrPhone});
-        if (doctorModel && (await doctorModel.matchPassword(password))) {
+        if (doctorModel && (await bcrypt.compare(password, doctorModel.hashedPassword))) {
             res.status(200).json({message: 'Doctor logged in successfully'});
         } else {
             res.status(401).json({message: 'Invalid email or password'});
