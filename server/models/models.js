@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect(URL);
+mongoose.connect(URL)
 .then(()=>console.log('Connected to MongoDB'))
 .catch((error)=>console.log(error));
 
