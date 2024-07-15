@@ -9,7 +9,8 @@ const patientSchema = new mongoose.Schema({
 const doctorSchema = new mongoose.Schema({
     name: {type: String, required: true},
     emailOrPhone: {type: String, required: true},
-    hashedPassword: {type: String, required: true}
+    hashedPassword: {type: String, required: true},
+    // extraInfo: {type: Array, required: true}
 })
 
 const Patient = mongoose.model('Patient', patientSchema);
