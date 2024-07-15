@@ -1,5 +1,6 @@
 import { TextField , Button} from "@mui/material"
 import { useState } from "react"
+import axios from 'axios';
 import './signUp.css'
 
 const Login = () => {
@@ -18,6 +19,10 @@ const Login = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
+        const {emailOrPhone , password} = formData;
+        axios.post('http://localhost:5000/api/login' , {emailOrPhone , password})
+        .then((res) => console.log(res.data))
+        .catch(e => console.log(e))
         console.log(formData);
     }
 

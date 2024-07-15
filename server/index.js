@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import router from './routes/patientRoutes.js'
 
 const app = express();
 app.use(cors(
     {
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:5173',
         credentials: true, 
         allowedHeaders: ['Content-Type'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -27,6 +28,7 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/virtualVitals');
 }
 
+app.use('/api' , router);
 app.get('/', (req, res) => {
     res.send('Hello World');
 }); 
