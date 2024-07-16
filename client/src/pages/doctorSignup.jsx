@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { TextField, Button} from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './signUp.css';
 
 const DoctorSignup = () => {
     let [formData , setFormData] = useState({
-    doctor_name : '',
+    name : '',
     emailOrPhone : '',
     password : ''
 
@@ -21,18 +22,23 @@ const DoctorSignup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const {name , emailOrPhone , password} = formData;
+    axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , emailOrPhone ,password})
+    .then((res) => console.log(res.data))
+    .catch(e => console.log(e))
     console.log('Form Data:', formData);
-    // Add form submission logic here
+    
   };
     return(
         
         <div className='signUp-form'>
                 <p style={{fontSize : '2rem ' , textAlign : 'center'}}>Sign Up</p>
+              <form onSubmit={handleSubmit}>
                 <TextField
                 variant="outlined"
                 className='input-fields'
                 label="Doctor Name"
-                name="doctor_name"
+                name="name"
                 value={formData.doctor_name}
                 onChange={handleChange}
                 />
@@ -81,7 +87,8 @@ const DoctorSignup = () => {
                 }}></i>
                 SignUp with Google
                 </div>
-              </div>  
+            </form>  
+          </div>  
     )
 }
 

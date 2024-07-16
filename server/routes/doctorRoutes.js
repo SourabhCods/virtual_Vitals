@@ -1,18 +1,22 @@
-import router from "./patientRoutes.js";
+import express from 'express';
 import bcrypt from 'bcrypt';
+import  { Doctor } from '../models/models.js'
 
-router.post('/signup', async (req, res) => {
+const Router = express.Router();
+
+Router.post('/doctorSignup', async (req, res) => {
     const {name, emailOrPhone, password} = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         const doctorModel = await Doctor.create({name, emailOrPhone, hashedPassword});
+        console.log("New Doctor Created Sucessfully")
         res.status(201).json({message: 'Doctor created successfully'});
     } catch (error) {
         console.log(error);
     }
 })
 
-router.post('/login', async (req, res) => {
+Router.post('/login', async (req, res) => {
     const {emailOrPhone, password} = req.body;
     try {
         const doctorModel = await Doctor.findOne({emailOrPhone});
@@ -25,3 +29,5 @@ router.post('/login', async (req, res) => {
         console.log(error);
     }
 })
+
+export default Router;

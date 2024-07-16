@@ -25,9 +25,10 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {name , emailOrPhone , password} = formData;
-    axios.post('http://localhost:5000/api/signup' , {name , emailOrPhone ,password})
+    axios.post('http://localhost:5000/api/patientSignup' , {name , emailOrPhone ,password})
     .then((res) => console.log(res.data))
     .catch(e => console.log(e))
+    console.log(formData);
   };
 
   

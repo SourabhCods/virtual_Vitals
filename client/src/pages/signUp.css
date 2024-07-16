@@ -29,3 +29,9 @@
     cursor: pointer;
 
 }
+.user-type-selector{
+    display: flex;
+    justify-content: space-between;
+    margin : 2.5rem 0 2.5rem 0;
+    font-size : 1.25rem;
+}

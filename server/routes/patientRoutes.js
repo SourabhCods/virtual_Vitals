@@ -1,10 +1,10 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import Patient from '../models/models.js'
+import  { Patient } from '../models/models.js'
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post('/patientSignup', async (req, res) => {
   const {name, emailOrPhone, password} = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

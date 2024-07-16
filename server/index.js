@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import router from './routes/patientRoutes.js'
+import Router from './routes/doctorRoutes.js'
 
 const app = express();
 app.use(cors(
@@ -29,6 +30,7 @@ async function main() {
 }
 
 app.use('/api' , router);
+app.use('/docRoute' , Router);
 app.get('/', (req, res) => {
     res.send('Hello World');
 }); 
