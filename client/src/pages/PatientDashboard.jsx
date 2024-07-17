@@ -9,14 +9,14 @@ import {androidAlarmClock} from 'react-icons-kit/ionicons/androidAlarmClock';
 import {userMd} from 'react-icons-kit/fa/userMd';
 import {bell} from 'react-icons-kit/fa/bell';
 import {signOut} from 'react-icons-kit/fa/signOut';
-
+import {gear} from 'react-icons-kit/fa/gear'
 
 const PatientDashboard = () => {
   return (
     <>
     <NavBar />
     <div className='bg-blue-200 w-screen h-screen' >
-
+      <button style={{backgroundColor: 'white', width: '180px', height: '40px', textAlign: 'center', position: 'relative', color: 'black', left: '85%', top: '5%', display: 'flex', gap: '15px', padding: '7px', borderRadius: '8px', fontWeight: 500}}><Icon icon={gear} size={25} style={{color: 'rgb(0, 106, 255)', position: 'relative', bottom: '1px'}} />Edit your Profile</button>
       <div id='dashboard-section'>
 
         <div id="personal-info">
@@ -35,17 +35,17 @@ const PatientDashboard = () => {
         </div>
         
         <div id="appointments">
-          <div style={{width: '105.4%',height: '19%',position: 'relative', right: '11px', bottom: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Appointments</h1></div>
+          <div style={{width: '105.4%',height: '19%',position: 'relative', right: '11px', bottom: '10px', overflow: 'hidden', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Appointments</h1></div>
         
         </div>
 
         <div id="prescriptions">
-          <div style={{width: '105.4%',height: '19%',position: 'relative', right: '11px', bottom: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Prescriptions</h1></div>
+          <div style={{width: '105.4%',height: '19%',position: 'relative', right: '11px', bottom: '10px', overflow: 'hidden', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Prescriptions</h1></div>
   
         </div>
 
         <div id="medications">
-          <div style={{width: '102.5%',height: '35%',position: 'relative', right: '11px', bottom: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Current Medications</h1></div>
+          <div style={{width: '102.5%',height: '35%',position: 'relative', right: '11px', bottom: '10px', overflow: 'hidden', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingTop: '5px'}}><h1 className='font-bold text-2xl'>Current Medications</h1></div>
         </div>
       </div>
     </div>
