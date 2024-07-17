@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { TextField, Button} from '@mui/material';
 import './signUp.css';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { NavBar } from './LandingPage';
 
 const Auth = () => {
   
   let [formData , setFormData] = useState({
-    patient_name : '',
+    name : '',
     emailOrPhone : '',
     password : ''
 
@@ -23,8 +24,11 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    // Add form submission logic here
+    const {name , emailOrPhone , password} = formData;
+    axios.post('http://localhost:5000/api/patientSignup' , {name , emailOrPhone ,password})
+    .then((res) => console.log(res.data))
+    .catch(e => console.log(e))
+    console.log(formData);
   };
 
   
@@ -33,12 +37,12 @@ const Auth = () => {
       <NavBar/>
       <div className='signUp-form'>
           <p style={{fontSize : '2rem ' , textAlign : 'center'}}>Sign Up</p>
-          <form>
+          <form onSubmit={handleSubmit}>
           <TextField
             className='input-fields'
             variant="outlined"
             label="Patient Name"
-            name="patient_name"
+            name="name"
             value={formData.patient_name}
             onChange={handleChange}
           />

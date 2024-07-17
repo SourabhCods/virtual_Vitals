@@ -75,7 +75,7 @@ const NavBar = () => {
       setActiveLink('/support');
     }
   }, [currentPage]);
-  console.log(currentPage);
+  // console.log(currentPage);
   const [activeLink, setActiveLink] = useState('/');
   const navigate = useNavigate();
   const handleClick  = (link)=>()=>{
