@@ -5,8 +5,18 @@ import './signUp.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/images/logo.png'
+
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+
+
+
+
 const Auth = () => {
-  
+  const appVerifier = window.recaptchaVerifier;
+  const [displayOtpField, setDisplayOtpField] = useState(false);
+  const [otp, setOtp] = useState('');
+
+
   let [formData , setFormData] = useState({
     name : '',
     phone : '',
@@ -25,13 +35,45 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {name , phone , password} = formData;
-    axios.post('http://localhost:5000/api/patientSignup' , {name , phone ,password})
-    .then((res) => console.log(res.data))
-    .catch(e => console.log(e))
-    console.log(formData);
+
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
+      'size': 'invisible',
+      'callback': (response) => {
+        setDisplayOtpField(true);
+        signInWithPhoneNumber(auth, phone, appVerifier)
+
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+
+          confirmationResult.confirm(otp).then((result) => {
+
+            const user = result.user;
+
+            axios.post('http://localhost:5000/api/patientSignup' , {name , phone ,password})
+            .then((res) => console.log(res.data))
+            .catch(e => console.log(e))
+            
+            console.log(formData);
+          })
+          .catch((error) => {
+            console.log('Invalid code');
+          });
+        }).catch((error) => {
+            console.log('Error sending code');
+        });
+      }
+    });
+    
   };
 
   
+  const auth = getAuth();
+  auth.languageCode = 'it';
+
+  
+
+
+
   return (
       <>
       <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover w-screen h-screen'>
@@ -76,7 +118,14 @@ const Auth = () => {
           >
           Register
           </Button>
-
+          <TextField 
+            className='input-fields'
+            variant="outlined"
+            label="Enter OTP"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            style={{display: displayOtpField ? 'block' : 'none'}}
+          />
           <Link to='/signUpDoctor' ><p style={{color : 'red' , textAlign : 'center' , marginTop : '10px'}}>Sign Up as Doctor</p></Link>
           <Link to='/login'><p style={{textAlign : 'center' , marginTop : '10px'}}>Already have an account ? Login</p></Link>
       
