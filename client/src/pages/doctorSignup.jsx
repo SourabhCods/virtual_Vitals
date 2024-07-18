@@ -3,11 +3,13 @@ import { TextField, Button} from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './signUp.css';
+import '../styles.css'
+import Logo from '../resources/images/logo.png';
 
 const DoctorSignup = () => {
     let [formData , setFormData] = useState({
     name : '',
-    emailOrPhone : '',
+    phone : '',
     password : ''
 
   })
@@ -22,15 +24,16 @@ const DoctorSignup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {name , emailOrPhone , password} = formData;
-    axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , emailOrPhone ,password})
+    const {name , phone , password} = formData;
+    axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , phone ,password})
     .then((res) => console.log(res.data))
     .catch(e => console.log(e))
     console.log('Form Data:', formData);
     
   };
     return(
-        
+        <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover w-screen h-screen'>
+        <img src={Logo} id='logo'/>
         <div className='signUp-form'>
                 <p style={{fontSize : '2rem ' , textAlign : 'center'}}>Sign Up</p>
               <form onSubmit={handleSubmit}>
@@ -48,9 +51,9 @@ const DoctorSignup = () => {
                 className='input-fields'
                 required
                 variant="outlined"
-                label="Email or Phone"
-                name="emailOrPhone"
-                value={formData.emailOrPhone}
+                label="Phone"
+                name="Phone"
+                value={formData.phone}
                 onChange={handleChange}
                 />
 
@@ -59,7 +62,7 @@ const DoctorSignup = () => {
                 className='input-fields'
                 variant="outlined"
                 name="password"
-                label="Password"
+                label="Set Password"
                 type="password"
                 value={formData.password}
                 onChange={handleChange}
@@ -81,13 +84,11 @@ const DoctorSignup = () => {
       
                 <div className='log-google'>
                 <i 
-                className="fa-brands fa-google" 
-                style={{
-                  paddingRight : '2.5rem'
-                }}></i>
-                SignUp with Google
+                className="fa-brands fa-google" style={{position: 'relative', top: '6px', left: '10px'}}></i>
+                Sign up with Google
                 </div>
             </form>  
+          </div>
           </div>  
     )
 }

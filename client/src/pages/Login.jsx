@@ -1,13 +1,16 @@
 import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { useState ,  } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './signUp.css';
 
 const Login = () => {
-  let [formData, setFormData] = useState({
-    emailOrPhone: '',
-    password: ''
-  });
+    const navigate = useNavigate();
+
+    let [formData, setFormData] = useState({
+        emailOrPhone: '',
+        password: ''
+    });
 
   let [userType, setUserType] = useState('patient'); // 'patient' or 'doctor'
 
@@ -32,6 +35,7 @@ const Login = () => {
     axios.post(url, { emailOrPhone, password })
       .then((res) => console.log(res.data))
       .catch(e => console.log(e));
+      userType == "patient" ?  navigate('/dashboard')  : navigate('/doctorDashboard')
     console.log(formData);
   };
 
