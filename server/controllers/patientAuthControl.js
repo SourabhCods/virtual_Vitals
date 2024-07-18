@@ -4,10 +4,10 @@ import { Client, ID} from 'appwrite';
 
 
 export const patientSignUp = async (req, res) => {
-    const {name, phone, password} = req.body;
+    const {name, email, password} = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const patientModel = await Patient.create({name, phone, hashedPassword});
+        const patientModel = await Patient.create({name, email, hashedPassword});
         res.status(201).json({message: 'Patient created successfully', patientName: patientModel.name});
     } catch (error) {
         console.log(error);
@@ -15,9 +15,9 @@ export const patientSignUp = async (req, res) => {
 }
 
 export const patientLogin = async (req, res) => {
-    const {phone, password} = req.body;
+    const {email, password} = req.body;
     try {
-        const patientModel = await Patient.findOne({phone});
+        const patientModel = await Patient.findOne({email});
         if (patientModel && (await bcrypt.compare(password, patientModel.hashedPassword))) {
         res.status(200).json({message: 'Patient logged in successfully'});
         } else {

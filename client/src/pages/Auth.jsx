@@ -5,11 +5,15 @@ import './signUp.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/images/logo.png'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from '../firebase/firebaseSetup.js';
+
+
+
 const Auth = () => {
-  
   let [formData , setFormData] = useState({
     name : '',
-    phone : '',
+    email : '',
     password : ''
 
   })
@@ -22,13 +26,26 @@ const Auth = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const {name , phone , password} = formData;
-    axios.post('http://localhost:5000/api/patientSignup' , {name , phone ,password})
-    .then((res) => console.log(res.data))
-    .catch(e => console.log(e))
-    console.log(formData);
+    const {name , email , password} = formData;
+    const auth = getAuth(app);
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+
+      axios.post('http://localhost:5000/api/patientSignup' , {name: name , email: email ,password: password})
+      .then((res) => console.log(res.data))
+      .catch(e => console.log(e))
+      console.log(formData);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+    
   };
 
   
@@ -44,7 +61,7 @@ const Auth = () => {
             variant="outlined"
             label="Patient Name"
             name="name"
-            value={formData.patient_name}
+            value={formData.name}
             onChange={handleChange}
           />
 
@@ -53,10 +70,11 @@ const Auth = () => {
             className='input-fields'
             required
             variant="outlined"
-            label="Phone"
-            name="phone"
-            value={formData.phone}
+            label="Email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
+            type='email'
           />
 
           
