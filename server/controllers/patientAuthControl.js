@@ -1,6 +1,6 @@
 import { Patient } from "../models/models.js";
 import bcrypt from 'bcrypt';
-
+import { Client, ID} from 'appwrite';
 
 
 export const patientSignUp = async (req, res) => {
