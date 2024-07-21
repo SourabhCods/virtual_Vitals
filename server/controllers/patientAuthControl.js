@@ -1,13 +1,13 @@
 import { Patient } from "../models/models.js";
 import bcrypt from 'bcrypt';
-import { Client, ID} from 'appwrite';
-
+import { OAuth2Client } from 'google-auth-library';
+import jwt from 'jsonwebtoken';
 
 export const patientSignUp = async (req, res) => {
     const {name, email, password} = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const patientModel = await Patient.create({name, email, hashedPassword});
+        const patientModel = await Patient.create({name: name, email: email, hashedPassword: hashedPassword});
         res.status(201).json({message: 'Patient created successfully', patientName: patientModel.name});
     } catch (error) {
         console.log(error);
@@ -27,3 +27,22 @@ export const patientLogin = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
+export const patientGoogleSignUp = async (req, res) => {
+    const {token} = req.body;
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    console.log(client);
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+    const {name, email} = ticket.getPayload();
+    console.log(name, email);
+}
+
+
+
+
+

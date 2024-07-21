@@ -5,11 +5,14 @@ import axios from 'axios';
 import './signUp.css';
 import '../styles.css'
 import Logo from '../resources/images/logo.png';
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from '../firebase/firebaseSetup.js';
+
 
 const DoctorSignup = () => {
     let [formData , setFormData] = useState({
     name : '',
-    phone : '',
+    email : '',
     password : ''
 
   })
@@ -22,15 +25,49 @@ const DoctorSignup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const auth = getAuth(app);
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((response)=>{
+        const credentials = GoogleAuthProvider.credentialFromResult(response);
+        const token = credentials.accessToken;
+        const user = response.user;
+        console.log(user);
+        axios('http://localhost:5000/docRoute/doctorSignup', {user})
+        .then((res) => console.log(res.data))
+        .catch(e => console.log(e))
+        
+    })
+    .catch((error)=>{
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      const emailFromGoogle = error.customData.email;
+      const credentialsFromError = GoogleAuthProvider.credentialFromError(error);
+      console.log(emailFromGoogle, credentialsFromError); 
+    })
+  }
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const {name , phone , password} = formData;
-    axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , phone ,password})
+    const {name , email , password} = formData;
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , email ,password})
     .then((res) => console.log(res.data))
     .catch(e => console.log(e))
-    console.log('Form Data:', formData);
-    
-  };
+    console.log('Form Data:', formData)
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+  }
     return(
         <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover w-screen h-screen'>
         <img src={Logo} id='logo'/>
@@ -51,9 +88,9 @@ const DoctorSignup = () => {
                 className='input-fields'
                 required
                 variant="outlined"
-                label="Phone"
-                name="Phone"
-                value={formData.phone}
+                label="Email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
                 />
 
@@ -82,7 +119,7 @@ const DoctorSignup = () => {
       
         
       
-                <div className='log-google'>
+                <div className='log-google' onClick={googleSignIn}>
                 <i 
                 className="fa-brands fa-google" style={{position: 'relative', top: '6px', left: '10px'}}></i>
                 Sign up with Google

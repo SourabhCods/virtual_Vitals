@@ -5,7 +5,7 @@ import './signUp.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/images/logo.png'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from '../firebase/firebaseSetup.js';
 
 
@@ -25,11 +25,38 @@ const Auth = () => {
       [name]: value
     }));
   };
+  const auth = getAuth(app);
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+    .then(async (response)=>{
+        const credentials = GoogleAuthProvider.credentialFromResult(response);
+        const user = response.user;
+        const token = await user.getIdToken();
+        const registration = await fetch('http://localhost:5000/api/patientsignup/google',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({token: token})
+        } )
+        .then((res) => console.log(res.data))
+        .catch(e => console.log(e))
+        
+    })
+    .catch((error)=>{
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      const emailFromGoogle = error.customData.email;
+      const credentialsFromError = GoogleAuthProvider.credentialFromError(error);
+      console.log(emailFromGoogle, credentialsFromError); 
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const {name , email , password} = formData;
-    const auth = getAuth(app);
     await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -100,7 +127,7 @@ const Auth = () => {
       
         
       
-        <div className='log-google'>
+        <div className='log-google' onClick={googleSignIn}>
           <i 
           className="fa-brands fa-google" style={{position: 'relative', top: '6px', left: '10px'}}></i>
           Sign up with Google

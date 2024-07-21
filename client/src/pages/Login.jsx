@@ -3,12 +3,15 @@ import { useState ,  } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './signUp.css';
+import Logo from '../resources/images/logo.png'
+import { app } from '../firebase/firebaseSetup.js';
+
 
 const Login = () => {
     const navigate = useNavigate();
 
     let [formData, setFormData] = useState({
-        emailOrPhone: '',
+        email: '',
         password: ''
     });
 
@@ -28,19 +31,23 @@ const Login = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    const { emailOrPhone, password } = formData;
+    const { email, password } = formData;
     const url = userType === 'patient'
       ? 'http://localhost:5000/api/login'
       : 'http://localhost:5000/docRoute/login';
-    axios.post(url, { emailOrPhone, password })
-      .then((res) => console.log(res.data))
+    axios.post(url, { email, password })
+      .then((res) => {console.log(res.data);
+        userType === "patient" ?  navigate('/dashboard')  : navigate('/doctorDashboard')
+  })
       .catch(e => console.log(e));
-      userType == "patient" ?  navigate('/dashboard')  : navigate('/doctorDashboard')
+      
     console.log(formData);
   };
 
   return (
     <>
+    <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover'>
+    <img src={Logo} id="logo" />
       <div className="signUp-form">
         <p style={{ fontSize: '2rem', textAlign: 'center' }}>Login</p>
         <form onSubmit={onFormSubmit}>
@@ -71,9 +78,9 @@ const Login = () => {
           <TextField
             className="input-fields"
             variant="outlined"
-            label="Email or Phone"
-            name="emailOrPhone"
-            value={formData.emailOrPhone}
+            label="Email"
+            name="email"
+            value={formData.email}
             onChange={handleOnChange}
           />
 
@@ -98,13 +105,13 @@ const Login = () => {
           <div className='log-google'>
             <i
               className="fa-brands fa-google"
-              style={{
-                paddingRight: '2.5rem'
-              }}>
+              style={{position: 'relative', top: '6px', left: '10px'}}
+              >
             </i>
             Login with Google
           </div>
         </form>
+      </div>
       </div>
     </>
   );
