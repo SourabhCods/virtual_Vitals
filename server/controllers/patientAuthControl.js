@@ -19,7 +19,7 @@ export const patientLogin = async (req, res) => {
     try {
         const patientModel = await Patient.findOne({email});
         if (patientModel && (await bcrypt.compare(password, patientModel.hashedPassword))) {
-        res.status(200).json({message: 'Patient logged in successfully'});
+        res.status(200).json({message: 'Patient logged in successfully', patientName: patientModel.name});
         } else {
         res.status(401).json({message: 'Invalid email or password'});
         }
@@ -27,22 +27,6 @@ export const patientLogin = async (req, res) => {
         console.log(error);
     }
 }
-
-
-
-export const patientGoogleSignUp = async (req, res) => {
-    const {token} = req.body;
-    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-    console.log(client);
-    const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID
-    });
-    const {name, email} = ticket.getPayload();
-    console.log(name, email);
-}
-
-
 
 
 

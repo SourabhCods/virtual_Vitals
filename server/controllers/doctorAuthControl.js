@@ -18,7 +18,7 @@ export const doctorLogin = async (req, res) => {
     try {
         const doctorModel = await Doctor.findOne({email});
         if (doctorModel && (await bcrypt.compare(password, doctorModel.hashedPassword))) {
-            res.status(200).json({message: 'Doctor logged in successfully'});
+            res.status(200).json({message: 'Doctor logged in successfully', doctorName: doctorModel.name});
         } else {
             res.status(401).json({message: 'Invalid email or password'});
         }
