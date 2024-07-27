@@ -26,3 +26,8 @@ export const doctorLogin = async (req, res) => {
         console.log(error);
     }
 }
+
+export const searchDoctors = async (req , res) => {
+    let allDoctors = await Doctor.find();
+    res.send(allDoctors);
+}

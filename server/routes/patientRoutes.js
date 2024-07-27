@@ -10,4 +10,5 @@ router.post('/login', patientLogin);
 
 router.post('/patientsignup/google', patientGoogleSignUp);
 
+
 export default router;

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState  } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button} from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +11,9 @@ import { app } from '../firebase/firebaseSetup.js';
 
 
 const DoctorSignup = () => {
+
+  const navigate = useNavigate();
+
     let [formData , setFormData] = useState({
     name : '',
     email : '',
@@ -60,6 +64,7 @@ const DoctorSignup = () => {
     axios.post('http://localhost:5000/docRoute/doctorSignup' , {name , email ,password})
     .then((res) => console.log(res.data))
     .catch(e => console.log(e))
+    navigate('/doctorDashboard' , {state : name})
     console.log('Form Data:', formData)
     })
     .catch((error) => {
