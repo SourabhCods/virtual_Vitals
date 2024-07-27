@@ -1,4 +1,4 @@
-import {Doctor} from '../models/models.js';
+import {Doctor} from '../../models/models.js';
 import bcrypt from 'bcrypt';
 
 export const doctorSignUp = async (req, res) => {

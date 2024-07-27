@@ -1,4 +1,4 @@
-import { Patient } from "../models/models.js";
+import { Patient } from "../../models/models.js";
 import bcrypt from 'bcrypt';
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';

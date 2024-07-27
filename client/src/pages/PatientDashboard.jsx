@@ -11,6 +11,7 @@ import {gear} from 'react-icons-kit/fa/gear'
 import {BeatLoader} from 'react-spinners';
 import NavBar from '../components/NavBar.jsx';
 import {motion} from 'framer-motion';
+import Logo from '../resources/images/logo.png'
 
 
 const PatientDashboard = () => {
@@ -36,18 +37,20 @@ const PatientDashboard = () => {
   }, []);
   return (
     <div>
-      <motion.div
-      initial={{opacity: 0, x: '-100vw'}}
-      animate={{opacity: 1, x: 0}}
-      transition={{duration: 0.3, delay: 0.5, tween: 'easeInOut'}}
-      exit={{opacity: 0, x: '-100vw'}}
-      >
     {loading ? (
       <div>
         <BeatLoader color='rgb(0, 106, 255)' loading={loading} size={18} id='spinner' />
       </div>
     ) : (
       <>
+      
+      <motion.div
+      initial={{opacity: 0, x: '-100vw'}}
+      animate={{opacity: 1, x: 0}}
+      transition={{duration: 0.3, delay: 0.5, tween: 'easeInOut'}}
+      exit={{opacity: 0, x: '-100vw'}}
+      >
+    <img src={Logo} id='logo' />
     <NavBar userName={userName} />
     <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover w-screen h-screen' >
       <button style={{backgroundColor: 'white', width: '180px', height: '40px', textAlign: 'center', position: 'relative', color: 'black', left: '85%', top: '5%', display: 'flex', gap: '15px', padding: '7px', borderRadius: '8px', fontWeight: 500}}><Icon icon={gear} size={25} style={{color: 'rgb(0, 106, 255)', position: 'relative', bottom: '1px'}} />Edit your Profile</button>
@@ -68,8 +71,8 @@ const PatientDashboard = () => {
           </ol>
         </div>
         
-        <div id="appointments">
-          <div style={{width: '102.45%',height: '33%',position: 'relative', right: '11px', bottom: '10px', overflow: 'hidden', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingBottom: '7px'}}><h1 className='font-bold text-xl'>Appointments</h1></div>
+        <div id="upcoming-appointments">
+          <div style={{width: '102.45%',height: '33%',position: 'relative', right: '11px', bottom: '10px', overflow: 'hidden', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', backgroundColor: 'rgb(0, 106, 255)', color: 'white', paddingLeft: '14px', paddingBottom: '7px'}}><h1 className='font-bold text-xl'>Upcoming Appointments</h1></div>
         
         </div>
 
@@ -82,9 +85,10 @@ const PatientDashboard = () => {
         </div>
       </div>
     </div>
+      </motion.div>
     </>
     )}
-    </motion.div>
+    
     </div>
   )
 }

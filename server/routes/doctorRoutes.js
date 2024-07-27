@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import  { Doctor } from '../models/models.js'
-import {doctorLogin, doctorSignUp} from '../controllers/doctorAuthControl.js'
+import {doctorLogin, doctorSignUp} from '../controllers/doctor/doctorAuthControl.js'
 
 
 const Router = express.Router();
