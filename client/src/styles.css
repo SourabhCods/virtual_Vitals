@@ -15,33 +15,34 @@
 }
 
 #logo {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    left: 20px;
-    bottom: 25px;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 1rem;
+    top: -1rem;
+    z-index: 9999;
 }
 
 #doctors-img {
     width: 35%;
     height: 75%;
     position: relative;
-    left: 65.55rem;
-    bottom: 1.75rem;
+    left: 60.55rem;
+    top: 24%;
     overflow: hidden;
     margin-right : 2px;
     filter: drop-shadow(0 0 0.75rem black);
 }
 
 #nav-bar {
-    width: 300px;
+    width: 650px;
     height: 40px;
     border-radius: 5px;
     border: 2px solid rgb(0, 106, 255);
     color: black;
-    position: absolute;
-    top: 5%;
-    right: 40%;
+    position: relative;
+    left: 28rem;
+    top: 2rem;
     position: fixed;
     z-index: 999;
     background-color: white;
@@ -59,7 +60,7 @@
 
 #nav-bar ol li{
     border-radius: 4px;
-    width: 33.33%;
+    width: fit-content;
     height: 100%;
     margin: auto;
     font-family: Rubik;
@@ -93,7 +94,7 @@
     height: 50%;
     position: relative;
     left: 3%;
-    bottom: 70%;
+    bottom: 44%;
 }
 
 #patient-button {
@@ -105,7 +106,7 @@
     text-align: center;
     position: relative;
     left: 72%;
-    bottom: 96.95%;
+    bottom: 70.95%;
     font-weight: 500;
     font-family: Rubik;
     z-index: 997;
@@ -120,7 +121,7 @@
     text-align: center;
     position: relative;
     left: 74%;
-    bottom: 96.95%;
+    bottom: 70.95%;
     font-weight: 500;
     font-family: Rubik;
     border: 3px solid black;
@@ -136,7 +137,7 @@
     text-align: center;
     position: relative;
     left: 3%;
-    bottom: 92%;
+    bottom: 66%;
     font-weight: 500;
     font-family: Rubik;
 }
@@ -343,6 +344,13 @@
 
 /*Dashboard.jsx  */
 
+#spinner {
+    position: relative;
+    top: 19rem;
+    left: 46.5rem;
+}
+
+
 #dashboard-section {
     width: 90vw;
     height: 78vh;
@@ -399,9 +407,9 @@
 }    
 
 
-#appointments {
-    width: 30%;
-    height: 50%;
+#upcoming-appointments {
+    width: 70%;
+    height: 20%;
     border: 2px solid black;
     border-radius: 10px;
     position: relative;
@@ -412,25 +420,71 @@
 }
 
 #prescriptions {
-    width: 30%;
-    height: 50%;
+    width: 70%;
+    height: 20%;
     border: 2px solid black;
     border-radius: 10px;
     position: relative;
-    bottom: 145%;
-    left: 65%;
+    bottom: 80%;
+    left: 25%;
     background-color: transparent;
     padding: 10px;
 }
 
 #medications {
     width: 70%;
-    height: 30%;
+    height: 20%;
     border: 2px solid black;
     border-radius: 10px;
     position: relative;
-    bottom: 135%;
+    bottom: 65%;
     left: 25%;
     background-color: transparent;
     padding: 10px;
 }
+
+
+/* Appointments.jsx */
+
+#my-appointments {
+    width: 90vw;
+    height: 78vh;
+    background-color: white;
+    border: 3px solid rgb(0, 106, 255);
+    background-size: cover;
+    border-radius: 20px;
+    margin: auto;
+    position: relative;
+    left: 0rem;
+    top: 6rem;
+    z-index: 0;
+}
+
+#book-appointment {
+    width: 240px;
+    height: 50px;
+    background-color: rgb(0, 106, 255);
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    left: 80%;
+    bottom: 6%;
+    font-weight: 500;
+    font-family: Rubik;
+    z-index: 999;
+}
+
+#search-doctors {
+    width: 170px;
+    height: 40px;
+    background-color: rgb(0, 106, 255);
+    color: white;
+    border-radius: 5px;
+    font-weight: 500;
+    font-family: Rubik;
+    z-index: 997;
+    position: relative;
+    bottom: 0.6rem;
+    left: 3.3rem;
+}   

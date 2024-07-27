@@ -35,18 +35,16 @@ const Login = () => {
     const url = userType === 'patient'
       ? 'http://localhost:5000/api/login'
       : 'http://localhost:5000/docRoute/login';
-    axios.post(url, { email, password })
-      .then((res) => {console.log(res.data);
-        userType === "patient" ?  navigate('/dashboard')  : navigate('/doctorDashboard')
-  })
+    axios.post(url, { email: email, password: password })
+      .then((res) => {console.log('User logged in successfully');
+        userType === "patient" ?  navigate(`/dashboard?userName=${encodeURIComponent(res.data.patientName)}`)  : navigate(`/doctorDashboard?userName=${encodeURIComponent(res.data.doctorName)}`);
+      })
       .catch(e => console.log(e));
-      
-    console.log(formData);
   };
 
   return (
     <>
-    <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover'>
+    <div className='bg-[url("./resources/images/auth-bg.avif")] bg-cover w-screen h-screen'>
     <img src={Logo} id="logo" />
       <div className="signUp-form">
         <p style={{ fontSize: '2rem', textAlign: 'center' }}>Login</p>
@@ -101,15 +99,6 @@ const Login = () => {
           >
             Login
           </Button>
-
-          <div className='log-google'>
-            <i
-              className="fa-brands fa-google"
-              style={{position: 'relative', top: '6px', left: '10px'}}
-              >
-            </i>
-            Login with Google
-          </div>
         </form>
       </div>
       </div>

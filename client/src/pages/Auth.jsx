@@ -26,33 +26,6 @@ const Auth = () => {
     }));
   };
   const auth = getAuth(app);
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-    .then(async (response)=>{
-        const credentials = GoogleAuthProvider.credentialFromResult(response);
-        const user = response.user;
-        const token = await user.getIdToken();
-        const registration = await fetch('http://localhost:5000/api/patientsignup/google',{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({token: token})
-        } )
-        .then((res) => console.log(res.data))
-        .catch(e => console.log(e))
-        
-    })
-    .catch((error)=>{
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      const emailFromGoogle = error.customData.email;
-      const credentialsFromError = GoogleAuthProvider.credentialFromError(error);
-      console.log(emailFromGoogle, credentialsFromError); 
-    })
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,12 +33,9 @@ const Auth = () => {
     await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
-
       axios.post('http://localhost:5000/api/patientSignup' , {name: name , email: email ,password: password})
-      .then((res) => console.log(res.data))
+      .then((res) => console.log(res.data.name))
       .catch(e => console.log(e))
-      console.log(formData);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -124,14 +94,6 @@ const Auth = () => {
 
           <Link to='/signUpDoctor' ><p style={{color : 'red' , textAlign : 'center' , marginTop : '10px'}}>Sign Up as Doctor</p></Link>
           <Link to='/login'><p style={{textAlign : 'center' , marginTop : '10px'}}>Already have an account ? Login</p></Link>
-      
-        
-      
-        <div className='log-google' onClick={googleSignIn}>
-          <i 
-          className="fa-brands fa-google" style={{position: 'relative', top: '6px', left: '10px'}}></i>
-          Sign up with Google
-        </div>
       
       </form>
 
