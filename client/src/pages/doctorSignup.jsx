@@ -43,8 +43,6 @@ const DoctorSignup = () => {
 <<<<<<< HEAD
     navigate('/doctorDashboard' , {state : name})
     console.log('Form Data:', formData)
-=======
->>>>>>> 6c430bf48453673350a095717ffff26dcdc38b1c
     })
     .catch((error) => {
       const errorCode = error.code;
