@@ -17,8 +17,15 @@ import { AnimatePresence } from 'framer-motion';
 >>>>>>> 6c430bf48453673350a095717ffff26dcdc38b1c
 
 const App  = ()=>{
+import Appointments from './pages/Appointments.jsx';
+import Prescriptions from './pages/Prescriptions.jsx';
+import Support from './pages/Support.jsx';
+import { AnimatePresence } from 'framer-motion';
+
+const App  = ()=>{
   return (
     <div>
+      <AnimatePresence>
       <AnimatePresence>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -26,6 +33,8 @@ const App  = ()=>{
         <Route path="/dashboard" element={<PatientDashboard />} />
 <<<<<<< HEAD
         <Route path='/doctorDashboard' element={<DoctorDashboard/>} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/prescriptions" element={<Prescriptions />} />
         <Route path="/home" element={<UserHomePage />} />
         <Route path='/signUpDoctor' element={<DoctorSignup/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
@@ -38,7 +47,11 @@ const App  = ()=>{
         <Route path='/login' element={<Login />}></Route>
         <Route path='/support' element={<Support />}></Route>
 >>>>>>> 6c430bf48453673350a095717ffff26dcdc38b1c
+        <Route path='/signUpDoctor' element={<DoctorSignup />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/support' element={<Support />}></Route>
       </Routes>
+      </AnimatePresence>
       </AnimatePresence>
     </div>
   )

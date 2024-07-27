@@ -1,6 +1,6 @@
 import express from 'express';
-import {patientLogin, patientSignUp, patientGoogleSignUp} from '../controllers/patientAuthControl.js';
-
+import { patientLogin, patientSignUp } from '../controllers/patient/patientAuthControl.js';
+import { getAppointments, getData } from '../controllers/patient/patientRoutesControl.js';
 
 const router = express.Router();
 
@@ -8,7 +8,11 @@ router.post('/patientSignup', patientSignUp);
 
 router.post('/login', patientLogin);
 
-router.post('/patientsignup/google', patientGoogleSignUp);
+router.get('/patientDashboard/:username', getData);
+
+router.get('/appointments/:username', getAppointments);
+
+
 
 
 export default router;
